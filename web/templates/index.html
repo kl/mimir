@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+{% for post in posts %}
+<div>
+  <a href="{{ post.url() }}">{{ post.title }}</a>
+  {{ post.published_at_string() }}
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{
+  "db_name": "SQLite",
+  "query": "\n                SELECT hashed_password FROM admin_auth\n                ",
+  "describe": {
+    "columns": [
+      {
+        "name": "hashed_password",
+        "ordinal": 0,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "9f40360c01dec931d4081cb07f2db7dbe2dc1195d99ed6e63c68281bd844efb2"
+}

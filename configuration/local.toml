@@ -1,0 +1,6 @@
+# configuration/local.toml
+[application]
+host = "127.0.0.1"
+base_url = "http://127.0.0.1"
+# Prod must set this via an environment variable
+hmac_secret = "super-long-and-secret-random-key-needed-to-verify-message-integrity"

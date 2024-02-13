@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="{{ crate::ROUTE_API_NEW_POST }}" method="POST">
+  <div>
+    <label for="title">Title</label>
+    <input name="title" id="title" value="" />
+  </div>
+  <div style="display: flex; flex-direction: row">
+    <div>
+      <label for="url_id">Url ID</label>
+      <input name="url_id" id="url_id" value="" />
+    </div>
+    <div style="align-self: end; margin-left: auto">
+      <label for="publish">Publish post</label>
+      <input name="publish" id="publish" type="checkbox" checked="checked" value="true"/>
+    </div>
+  </div>
+  <br/>
+  <button id="mdButton" type="button">Markdown</button>
+  <button id="previewButton" type="button">Preview</button>
+  <button style="float: right">Submit!</button>
+  <textarea id="markdown_area" style="width: 100%" rows="25" name="markdown"></textarea>
+  <div id="preview_box" style="width: 100%; display: none"></div>
+  <br/>
+</form>
+{% endblock %}
+
+{% block bodyend %}
+<script>
+  // Automatically input URL ID
+  const title = document.getElementById("title");
+  const urlId = document.getElementById("url_id");
+  title.addEventListener("input", e => {
+    urlId.value = e.target.value
+            .toLowerCase()
+            .split(" ")
+            .join("-");
+  });
+
+  // Markdown and preview buttons
+  const mdArea = document.getElementById("markdown_area");
+  const previewBox = document.getElementById("preview_box");
+
+  document.getElementById("mdButton").addEventListener("click", () => {
+    mdArea.style.display = "";
+    previewBox.style.display = "none";
+  });
+
+  document.getElementById("previewButton").addEventListener("click", () => {
+    mdArea.style.display = "none";
+    previewBox.style.display = "";
+
+    const http = new XMLHttpRequest();
+    http.open("POST", "{{ crate::ROUTE_API_PREVIEW_HTML }}", true);
+
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    http.onreadystatechange = function() {
+      if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
+        previewBox.innerHTML = `<h1>${title.value}</h1>\n${http.responseText}`;
+      }
+    }
+    http.send("markdown=" + mdArea.value);
+  });
+</script>
+{% endblock %}

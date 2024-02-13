@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/light.css">
+    <link rel="stylesheet" href="/static/dark.css">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div id="content">
+      {% block content %}<p>Placeholder content</p>{% endblock %}
+    </div>
+    {{ crate::DEV_SCRIPTS|safe }}
+    {% block bodyend %}{% endblock %}
+  </body>
+</html>
+

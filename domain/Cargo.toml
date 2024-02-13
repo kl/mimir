@@ -1,0 +1,28 @@
+[package]
+name = "domain"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+secrecy = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+pulldown-cmark = "0.10.0"
+syntect = { version = "5.2.0",default-features = false, features = ["default-fancy"] }
+unicode-segmentation = "1"
+validator = "0.16.1"
+rand = { version = "0.8.5", features = ["std_rng"] }
+argon2 = "0.5.2"
+
+[dev-dependencies]
+claim = "0.5.0"
+fake = "2.9.2"

@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "\n            INSERT INTO admin_auth (hashed_password)\n            VALUES ($1)\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "a0f86930256a064be2c345e7c5d9073b53381d41107914441b4e341a989fa6e4"
+}

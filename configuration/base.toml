@@ -1,0 +1,6 @@
+# configuration/base.toml
+[application]
+port = 8000
+
+[database]
+url = "sqlite://database.sqlite"

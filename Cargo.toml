@@ -1,0 +1,38 @@
+[workspace]
+resolver = "2"
+members = [
+    "app",
+    "data",
+    "domain",
+    "web"
+]
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde = { version = "1", features = ["derive"] }
+tracing = { version = "0.1", features = ["log"] }
+secrecy = { version = "0.8", features = ["serde"] }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { version = "0.4" }
+anyhow = "1"
+thiserror = "1"
+async-trait = "0.1"
+
+[workspace.dependencies.sqlx]
+version = "0.7.3"
+default-features = false
+features = [
+    "runtime-tokio", "tls-rustls", "sqlite", "macros", "uuid", "chrono", "migrate"
+]
+
+[profile.dev.package.sqlx-macros]
+opt-level = 3
+
+[profile.dev.package.askama_derive]
+opt-level = 3
+
+[profile.dev.package.askama_parser]
+opt-level = 3
+
+[profile.dev.package.syntect]
+opt-level = 3

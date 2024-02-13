@@ -1,0 +1,39 @@
+[package]
+name = "mimir"
+version = "0.1.0"
+authors = ["Kalle Lindström <kalind@posteo.se>"]
+edition = "2021"
+default-run = "mimir"
+
+[[bin]]
+name = "mimir"
+path = "src/main.rs"
+
+[[bin]]
+name = "mimir-init-db"
+path = "src/initdb.rs"
+
+[dependencies]
+data = { path = "../data" }
+domain = { path = "../domain" }
+web = { path = "../web" }
+
+tokio = { workspace = true }
+secrecy = { workspace = true }
+anyhow = { workspace = true }
+sqlx = { workspace = true }
+uuid = { workspace = true }
+
+serde = { version = "1.0.196", features = ["derive"] }
+serde-aux = "4.4.0"
+config = "0.14.0"
+tracing = { workspace = true }
+tracing-subscriber = {  version = "0.3.18", features = ["registry", "env-filter"] }
+tracing-bunyan-formatter = "0.3.9"
+tracing-log = "0.2.0"
+tracing-actix-web = "0.7.9"
+
+[dev-dependencies]
+reqwest = {  version = "0.11.24", default-features = false, features = ["json", "rustls-tls", "cookies"] }
+once_cell = "1.19.0"
+serde_json = "1.0.113"
