@@ -10,7 +10,6 @@ env:
   CARGO_TERM_COLOR: always
   SQLX_VERSION: 0.7.3
   SQLX_FEATURES: "rustls,sqlite"
-  SQLX_OFFLINE: true
 
 # A workflow run is made up of one or more jobs, which run in parallel by default
 # Each job runs in a runner environment specified by runs-on
@@ -51,6 +50,16 @@ jobs:
           # This may be useful for ensuring reproducible builds, to use the exact same set of dependencies that were available when the package was published.
         # It may also be useful if a newer version of a dependency is published that no longer builds on your system, or has other problems
 
+      - name: Install just
+        run: cargo install just --locked
+
+       # We need to build first so we can use mimir-init-db
+      - name: Build project
+        run: cargo build
+
+      - name: Initialize database
+        run: just init-db
+
       - name: Check sqlx offline cache is up-to-date
         run: cargo sqlx prepare --workspace --check -- --all-targets --all-features
 
@@ -61,6 +70,8 @@ jobs:
   fmt:
     name: Rustfmt
     runs-on: ubuntu-latest
+    env:
+      SQLX_OFFLINE: true
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
@@ -74,6 +85,8 @@ jobs:
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
+    env:
+      SQLX_OFFLINE: true
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
