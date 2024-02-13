@@ -9,6 +9,7 @@
 - Markdown preview
 - Markdown code block syntax highlighting without Javascript
 - Light and dark themes depending on ```prefers-color-scheme```
+- Admin dashboard
 - Auto-reload of templates in debug mode
 - No JavaScript requried
 - Responsive design
