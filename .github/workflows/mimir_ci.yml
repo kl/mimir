@@ -51,6 +51,8 @@ jobs:
 
        # We need to build first so we can use mimir-init-db
       - name: Build project
+        env:
+          SQLX_OFFLINE: true
         run: cargo build
 
       - name: Initialize database
